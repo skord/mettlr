@@ -26,7 +26,7 @@ module Mettlr
         req.path = path
         req.params['ak'] = Mettlr::METTL_PUBLIC_KEY
         req.params['ts'] = Time.now.to_i.to_s
-        options.each do |k,v|Faraday::Utils.escape
+        options.each do |k,v|
           if v.is_a?(Hash)
             req.params[k] = v.to_json
           else
