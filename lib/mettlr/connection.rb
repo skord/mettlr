@@ -2,7 +2,7 @@ module Mettlr
   class Connection
     def self.connection
       @connection = Faraday.new('http://api.mettl.com/v1') do |c|
-        # c.options.params_encoder = Faraday::FlatParamsEncoder
+        c.options.params_encoder = Faraday::NestedParamsEncoder
         c.request :url_encoded
         c.request :json
         c.response :mashify
