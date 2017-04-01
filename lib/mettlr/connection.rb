@@ -7,6 +7,7 @@ module Mettlr
         c.request :json
         c.response :mashify
         c.response :json, content_type: /\bjson$/
+        c.response :logger
         c.use :instrumentation
         c.adapter :net_http
       end
@@ -25,7 +26,7 @@ module Mettlr
         req.path = path
         req.params['ak'] = Mettlr::METTL_PUBLIC_KEY
         req.params['ts'] = Time.now.to_i.to_s
-        binding.pry 
+        req.params.merge!(options)
         req.params = Hash[req.params.sort_by {|k,v| k.downcase}]
         req.params['asgn'] = Mettlr::Signature.new(req).signature
       end
