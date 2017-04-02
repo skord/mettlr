@@ -6,6 +6,8 @@ require 'base64'
 require 'hashie'
 require 'active_support'
 require 'json'
+require 'dry-initializer'
+require 'dry-types'
 
 require "mettlr/connection"
 require "mettlr/sig_gen"
