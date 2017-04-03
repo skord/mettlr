@@ -1,4 +1,3 @@
-require 'ostruct'
 module Mettlr
   class Schedule < Base
     extend Dry::Initializer
@@ -22,9 +21,15 @@ module Mettlr
     def self.find_all
       Mettlr::Connection.get("/v1/schedules").body.schedules.map {|x| new(x)}
     end
+    def self.find_by_access_key(access_key)
+      Mettlr::Connection.get("/v1/schedules/#{access_key}")
+    end
     def self.register_candidate(candidate, access_key)
       options = {"rd" => {"registrationDetails" => [candidate.to_params]}}
       Mettlr::Connection.post("/v1/schedules/#{access_key}/candidates", options)
+    end
+    def self.delete_report_for(candidate_email, access_key)
+      Mettlr::Connection.delete("/v1/schedules/#{access_key}/candidates/#{candidate_email}")
     end
     def create!
       Mettlr::Connection.post("/v1/assessments/#{@assessment_id}/schedules", to_param)

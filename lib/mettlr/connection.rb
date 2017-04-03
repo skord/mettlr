@@ -37,5 +37,14 @@ module Mettlr
         req.params['asgn'] = Mettlr::Signature.new(req).signature
       end
     end
+    def self.delete(path)
+      connection.delete do |req|
+        req.path = path
+        req.params['ak'] = Mettlr::METTL_PUBLIC_KEY
+        req.params['ts'] = Time.now.to_i.to_s
+        req.params = Hash[req.params.sort_by {|k,v| k.downcase}]
+        req.params['asgn'] = Mettlr::Signature.new(req).signature
+      end
+    end
   end
 end
