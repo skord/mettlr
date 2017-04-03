@@ -15,6 +15,7 @@ module Mettlr
     option :test_start_notification_url, type: Dry::Types['strict.string']
     option :test_finish_notification_url, type: Dry::Types['strict.string']
     option :test_graded_notification_url, type: Dry::Types['strict.string']
+    option :visual_proctoring, type: Dry::Types['hash']
     option :test_resume_enabled_for_expired_test_url, optional: true
     option :exit_redirection_url, optional: true
     option :schedule_window
@@ -51,7 +52,8 @@ module Mettlr
                  "testStartNotificationUrl" => @test_start_notification_url,
                  "testFinishNotificationUrl" => @test_finish_notification_url,
                  "testGradedNotificationUrl" => @test_graded_notification_url,
-                 "testResumeEnabledForExpiredTestURL" => @test_resume_enabled_for_expired_test_url}
+                 "testResumeEnabledForExpiredTestURL" => @test_resume_enabled_for_expired_test_url,
+                 "visualProctoring": @visual_proctoring}
       }
     end
   end
